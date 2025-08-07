@@ -1,7 +1,152 @@
 [
-  { "id": 1, "name": "Laptop Pro", "category": "Electronics", "price": 2499 },
-  { "id": 2, "name": "Noise Cancelling Headphones", "category": "Electronics", "price": 399 },
-  { "id": 3, "name": "Ultra‑Wide Monitor", "category": "Electronics", "price": 999 },
-  { "id": 4, "name": "Ergonomic Chair", "category": "Furniture", "price": 799 },
-  { "id": 5, "name": "Standing Desk", "category": "Furniture", "price": 119 }
+  {
+    "id": 1,
+    "name": "Laptop Pro",
+    "category": "Electronics",
+    "price": 2499
+  },
+  {
+    "id": 2,
+    "name": "Noise Cancelling Headphones",
+    "category": "Electronics",
+    "price": 399
+  },
+  {
+    "id": 3,
+    "name": "Ultra‑Wide Monitor",
+    "category": "Electronics",
+    "price": 999
+  },
+  {
+    "id": 4,
+    "name": "Ergonomic Chair",
+    "category": "Furniture",
+    "price": 799
+  },
+  {
+    "id": 5,
+    "name": "Standing Desk",
+    "category": "Furniture",
+    "price": 119
+  },
+  {
+    "id": 6,
+    "name": "Wireless Mouse",
+    "category": "Electronics",
+    "price": 79
+  },
+  {
+    "id": 7,
+    "name": "Mechanical Keyboard",
+    "category": "Electronics",
+    "price": 149
+  },
+  {
+    "id": 8,
+    "name": "External SSD 1TB",
+    "category": "Storage",
+    "price": 199
+  },
+  {
+    "id": 9,
+    "name": "USB-C Hub",
+    "category": "Accessories",
+    "price": 59
+  },
+  {
+    "id": 10,
+    "name": "Desk Lamp",
+    "category": "Lighting",
+    "price": 45
+  },
+  {
+    "id": 11,
+    "name": "Webcam HD",
+    "category": "Electronics",
+    "price": 89
+  },
+  {
+    "id": 12,
+    "name": "Bluetooth Speaker",
+    "category": "Audio",
+    "price": 129
+  },
+  {
+    "id": 13,
+    "name": "Laptop Stand",
+    "category": "Accessories",
+    "price": 39
+  },
+  {
+    "id": 14,
+    "name": "Wireless Charger",
+    "category": "Electronics",
+    "price": 49
+  },
+  {
+    "id": 15,
+    "name": "Office Chair",
+    "category": "Furniture",
+    "price": 299
+  },
+  {
+    "id": 16,
+    "name": "Bookshelf",
+    "category": "Furniture",
+    "price": 199
+  },
+  {
+    "id": 17,
+    "name": "Coffee Maker",
+    "category": "Kitchen",
+    "price": 129
+  },
+  {
+    "id": 18,
+    "name": "Smart Watch",
+    "category": "Wearables",
+    "price": 299
+  },
+  {
+    "id": 19,
+    "name": "Wireless Earbuds",
+    "category": "Audio",
+    "price": 159
+  },
+  {
+    "id": 20,
+    "name": "Tablet Pro",
+    "category": "Electronics",
+    "price": 899
+  },
+  {
+    "id": 21,
+    "name": "Desk Organizer",
+    "category": "Office Supplies",
+    "price": 29
+  },
+  {
+    "id": 22,
+    "name": "External Hard Drive 4TB",
+    "category": "Storage",
+    "price": 129
+  },
+  {
+    "id": 23,
+    "name": "Smartphone Premium",
+    "category": "Electronics",
+    "price": 999
+  },
+  {
+    "id": 24,
+    "name": "Desk Mat",
+    "category": "Office Supplies",
+    "price": 19
+  },
+  {
+    "id": 25,
+    "name": "Monitor Stand",
+    "category": "Accessories",
+    "price": 79
+  }
 ]

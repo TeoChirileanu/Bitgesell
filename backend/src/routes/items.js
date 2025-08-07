@@ -14,19 +14,44 @@ async function readData() {
 router.get('/', async (req, res, next) => {
   try {
     const data = await readData();
-    const { limit, q } = req.query;
+    const { page = 1, limit = 10, q } = req.query;
+    
+    const pageNum = parseInt(page, 10);
+    const limitNum = parseInt(limit, 10);
+    
+    if (isNaN(pageNum) || pageNum < 1) {
+      return res.status(400).json({ error: 'Invalid page parameter' });
+    }
+    
+    if (isNaN(limitNum) || limitNum < 1 || limitNum > 100) {
+      return res.status(400).json({ error: 'Invalid limit parameter. Must be between 1 and 100' });
+    }
+    
     let results = data;
 
     if (q) {
-      // Simple substring search (sub‑optimal)
-      results = results.filter(item => item.name.toLowerCase().includes(q.toLowerCase()));
+      results = results.filter(item =>
+        item.name.toLowerCase().includes(q.toLowerCase()) || 
+        item.category.toLowerCase().includes(q.toLowerCase())
+      );
     }
 
-    if (limit) {
-      results = results.slice(0, parseInt(limit));
-    }
+    const totalItems = results.length;
+    const totalPages = Math.ceil(totalItems / limitNum);
+    const startIndex = (pageNum - 1) * limitNum;
+    const endIndex = Math.min(startIndex + limitNum, totalItems);
+    
+    const paginatedResults = results.slice(startIndex, endIndex);
 
-    res.json(results);
+    res.json({
+      items: paginatedResults,
+      pagination: {
+        total: totalItems,
+        page: pageNum,
+        limit: limitNum,
+        totalPages
+      }
+    });
   } catch (err) {
     next(err);
   }
