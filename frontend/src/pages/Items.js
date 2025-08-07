@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, memo } from 'react';
 import { useData } from '../state/DataContext';
 import { Link } from 'react-router-dom';
+import { FixedSizeList as List } from 'react-window';
 
 const PaginationButton = ({ onClick, disabled, children }) => (
   <button 
@@ -20,6 +21,35 @@ const PaginationButton = ({ onClick, disabled, children }) => (
   </button>
 );
 
+const ItemRow = memo(({ index, style, data }) => {
+  const item = data[index];
+  return (
+    <div style={{ ...style, padding: '8px' }}>
+      <div style={{ 
+        padding: '12px', 
+        border: '1px solid #eee',
+        borderRadius: '4px',
+        height: '90%'
+      }}>
+        <Link 
+          to={'/items/' + item.id}
+          style={{ 
+            textDecoration: 'none', 
+            color: '#007bff',
+            fontWeight: 'bold',
+            fontSize: '16px'
+          }}
+        >
+          {item.name}
+        </Link>
+        <div style={{ color: '#666', marginTop: '4px' }}>
+          Category: {item.category} | Price: ${item.price}
+        </div>
+      </div>
+    </div>
+  );
+});
+
 function Items() {
   const { items, pagination, loading, error, fetchItems } = useData();
   const [searchTerm, setSearchTerm] = useState('');
@@ -29,7 +59,6 @@ function Items() {
     setSearchTerm(e.target.value);
   };
   
-  // Debounce search term to avoid too many API calls
   useEffect(() => {
     const timerId = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
@@ -116,38 +145,58 @@ function Items() {
       )}
       
       {loading ? (
-        <p>Loading...</p>
+        <div style={{ height: '600px', width: '100%' }}>
+          {/* Loading skeleton */}
+          <div style={{ height: '600px', width: '100%', overflow: 'hidden' }}>
+            {Array(8).fill(0).map((_, index) => (
+              <div key={index} style={{ 
+                padding: '8px',
+                height: '80px'
+              }}>
+                <div style={{ 
+                  padding: '12px', 
+                  border: '1px solid #eee',
+                  borderRadius: '4px',
+                  height: '90%',
+                  backgroundColor: '#f9f9f9',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}>
+                  <div style={{ 
+                    width: '60%', 
+                    height: '20px', 
+                    backgroundColor: '#efefef',
+                    marginBottom: '8px',
+                    borderRadius: '4px'
+                  }}></div>
+                  <div style={{ 
+                    width: '80%', 
+                    height: '16px', 
+                    backgroundColor: '#efefef',
+                    borderRadius: '4px'
+                  }}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       ) : (
         <>
           {/* Items list */}
           {items.length === 0 ? (
             <p>No items found.</p>
           ) : (
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              {items.map(item => (
-                <li key={item.id} style={{ 
-                  padding: '12px', 
-                  marginBottom: '8px', 
-                  border: '1px solid #eee',
-                  borderRadius: '4px'
-                }}>
-                  <Link 
-                    to={'/items/' + item.id}
-                    style={{ 
-                      textDecoration: 'none', 
-                      color: '#007bff',
-                      fontWeight: 'bold',
-                      fontSize: '16px'
-                    }}
-                  >
-                    {item.name}
-                  </Link>
-                  <div style={{ color: '#666', marginTop: '4px' }}>
-                    Category: {item.category} | Price: ${item.price}
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <div style={{ height: '600px', width: '100%' }}>
+              <List
+                height={600}
+                width="100%"
+                itemCount={items.length}
+                itemSize={80}
+                itemData={items}
+              >
+                {ItemRow}
+              </List>
+            </div>
           )}
           
           {pagination.totalPages > 1 && (
